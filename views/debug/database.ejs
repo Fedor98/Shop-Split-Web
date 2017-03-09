@@ -1,0 +1,85 @@
+<div>
+
+    <h3>Logins table</h3>
+    <table style="border-collapse: collapse;">
+        <tr>
+            <th style="border: 1px solid black;">id</th>
+            <th style="border: 1px solid black;">email</th>
+            <th style="border: 1px solid black;">password</th>
+        </tr>
+        <% logins.forEach(function(login) { %>
+        <tr class="dataUserRow-<%= login.id %>">
+            <td style="border: 1px solid black;"><%= login.id %></td>
+            <td style="border: 1px solid black;"><%= login.email %></td>
+            <td style="border: 1px solid black;"><%= login.password %></td>
+        </tr>
+        <% }); %>
+        
+    </table>
+    
+    <h3>User table</h3>
+    <table style="border-collapse: collapse;">
+        <tr>
+            <th style="border: 1px solid black;">id</th>
+            <th style="border: 1px solid black;">firstName</th>
+            <th style="border: 1px solid black;">lastName</th>
+            <th style="border: 1px solid black;">age</th>
+            <th style="border: 1px solid black;">address</th>
+            <th style="border: 1px solid black;">zipcode</th>
+            <th style="border: 1px solid black;">city</th>
+            <th style="border: 1px solid black;">country</th>
+            <th style="border: 1px solid black;">phone</th>
+            <th style="border: 1px solid black;">dateSubscript</th>
+        </tr>
+        <% users.forEach(function(user) { %>
+        <tr class="dataUserRow-<%= user.id %>">
+            <td style="border: 1px solid black;"><%= user.id %></td>
+            <td style="border: 1px solid black;"><%= user.firstName %></td>
+            <td style="border: 1px solid black;"><%= user.lastName %></td>
+            <td style="border: 1px solid black;"><%= user.age %></td>
+            <td style="border: 1px solid black;"><%= user.address %></td>
+            <td style="border: 1px solid black;"><%= user.zipcode %></td>
+            <td style="border: 1px solid black;"><%= user.city %></td>
+            <td style="border: 1px solid black;"><%= user.country %></td>
+            <td style="border: 1px solid black;"><%= user.phone %></td>
+            <td style="border: 1px solid black;"><%= user.dateSubscript %></td>
+        </tr>
+        <% }); %>
+        
+    </table>
+    
+    <h3>Interest table</h3>
+    <table style="border-collapse: collapse;">
+        <tr>
+            <th style="border: 1px solid black;">userId</th>
+            <th style="border: 1px solid black;">countries</th>
+            <th style="border: 1px solid black;">sites</th>
+            <th style="border: 1px solid black;">interests</th>
+        </tr>
+        <% interests.forEach(function(interest) { %>
+        <tr class="dataUserRow-<%= interest.userId %>">
+            <td style="border: 1px solid black;"><%= interest.userId %></td>
+            <td style="border: 1px solid black;"><%= interest.countries %></td>
+            <td style="border: 1px solid black;"><%= interest.sites %></td>
+            <td style="border: 1px solid black;"><%= interest.interest %></td>
+        </tr>
+        <% }); %>
+        
+    </table>
+    
+</div>
+    
+<script>
+    
+    $("tr").not(':first').hover(
+        function () {
+            var _class = $(this).attr('class');
+            $("." + _class).css("background", "#AAFFAA");
+        },
+        function () {
+            var _class = $(this).attr('class');
+            $("." + _class).css("background", "");
+        }
+    );
+
+</script>

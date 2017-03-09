@@ -1,0 +1,37 @@
+<div id="home-form">
+    <p id="connexion-title">Connexion</p>
+        <input id="email" type="email" name="email" placeholder="Email"/><br/>
+        
+        <input id="password" type="password" name="password" placeholder="Mot de passe"/><br/>
+        <button id="connexion">Connexion</button>
+    <p><a href="/sign_up">Inscription</a></p>
+</div>
+
+<h1>My First Google Map</h1>
+
+<div id="map" style="width:500px;height:500px"></div>
+
+<script>
+    $("#connexion").click(function(){
+        var _email = $("#email").val();
+        var _pass = $("#password").val();
+
+        if (!_email){
+            $("#email").css("border", "1px solid red");
+        }
+        if (!_pass){
+            $("#password").css("border", "1px solid red");
+        }
+        if (_email && _pass) {
+            $.post(
+                '/signIn',
+                {email: _email, password: _pass},
+                function () {
+                    window.location = "/current_user";
+                }
+            ).fail(function(res){
+                alert("Erreur : " + $.parseJSON(res.responseText).error);
+            });
+        }
+    });
+</script>

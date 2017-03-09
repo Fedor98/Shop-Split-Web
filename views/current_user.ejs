@@ -1,0 +1,39 @@
+<h2>Profil - <a href="/edit">editer profil</a></h2>
+<table>
+    <tr>
+        <td>Nom : </td>
+        <td><%= user.lastName %></td>
+    </tr>
+    <tr>
+        <td>Prénom</td>
+        <td><%= user.firstName %></td>
+    </tr>
+    <tr>
+        <td>Email : </td>
+        <td><%= email %></td>
+    </tr>
+    <tr>
+        <td>Pays : </td>
+        <td><% for (var i = 0; i < countries.length; ++i) { %>
+             <p style="border:1px solid black; margin-right:10px;">
+             <%= countries[i] %></p> <%}%></td>
+    </tr>
+
+    <tr>
+        <td>Sites favoris : </td>
+        <td>
+            <% for (var i = 0; i < sites.length; ++i) {%>
+            <p style="border:1px solid black; margin-right: 10px;">
+            <%= sites[i] %></p> <%}%>
+        </td>
+    </tr>
+    <tr>
+        <td>Intérêts : </td>
+        <td>
+            <% for (var i = 0; i < interests.length; ++i) {%>
+              <p style="border: 1px solid black; margin-right: 10px;">
+              <%= interests[i] %></p> <%}%>
+        </td>
+    </tr>
+</table>
+  <%= user.id %>

@@ -1,0 +1,31 @@
+<% if (typeof user != 'undefined') { %>
+    <%- include header_annonce %>
+<% } %>
+
+<div>
+
+    <h3>Annonce</h3>
+    
+    <table>
+    
+    <tr>
+        <td>Titre : </td>
+        <td><%= ad.title %></td>
+    </tr>
+    <tr>
+        <td>Auteur : </td>
+        <td><%= author.name %> (<a href="/messagerie/rediger/<%= author.id%>">Envoyer un message</a>)</td>
+    </tr>
+    <tr>
+        <td>Description : </td>
+        <td><%= ad.descr %></td>
+    </tr>
+        
+    <tr>
+        <td>Site/pays de la commande : </td>
+        <td><%= ad.location %></td>
+    </tr>
+        
+    </table>
+    
+</div>

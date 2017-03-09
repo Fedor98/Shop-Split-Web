@@ -1,0 +1,16 @@
+<div id="search-result">
+
+    <% users.forEach(function(user) { %>
+        <div class="user-tile">
+            <p><%= user.firstName %></p>
+            <p><%= user.lastName %></p>
+            <p><a href="/user/<%=user.id%>">Voir le profil</a></p>
+        </div>
+    <% }); %>
+    
+</div>
+
+
+<script>
+
+</script>

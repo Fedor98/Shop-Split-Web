@@ -1,0 +1,23 @@
+<% if (typeof user != 'undefined') { %>
+    <%- include header_message %>
+<% } %>
+
+<div >
+    <h2>Boîte de réception</h2>
+    <table id="mails">
+        <tr>
+            <th>A</th>
+            <th>Sujet</th>
+            <th>Date</th>
+            <th>Supprimer</th>
+        </tr>
+        <% mails.forEach(function(mail) { %>
+            <tr>
+                <td><a href="/user/<%= mail.user.id %>"><%= mail.user.name %></a></td>
+                <td><a href="/messagerie/lire/<%=mail.mail.id%>"><%= mail.mail.title %></a></td>
+                <td><%= mail.mail.date %></td>
+                <td>X</td>
+            </tr>
+        <% }); %>
+    </table>
+</div>

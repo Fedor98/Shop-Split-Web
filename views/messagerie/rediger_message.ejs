@@ -1,0 +1,48 @@
+<% if (typeof user != 'undefined') { %>
+    <%- include header_message %>
+<% } %>
+
+<h3>Nouveau message</h3>
+
+<div>
+
+    <form id="formMessage">
+        <label for="subject">Sujet : </label>
+        <input type="text" id="subject" name="subject" placeholder="Sujet" 
+               value="<% if (typeof subject != 'undefined') { %><%= subject %><% } %>"/><br/>
+        <label for="message">Message : </label><br/>
+        <textarea id="message" name="message" rows=10 cols="70"></textarea>
+        
+        <input type="text" id="to" name="to" style="display:none;" value="<%= userTo %>" />
+       
+    </form>
+    <button id="sendMessage">Envoyer</button>
+    
+</div>
+
+<script>
+    $("#sendMessage").click(function() {
+        if ($("#subject").val() == "")
+        {
+            $("#subject").css("border", "1px solid red");
+            return;
+        }
+        
+        var subject = $("#subject").val();
+        var message = $("#message").val();
+        var to      = $("#to").val();
+        
+        
+        $.post(
+            '/messagerie/envoie',
+            {
+                subject: subject,
+                message: message,
+                to: to
+            },
+            function() {
+                window.location = "/messagerie/envoye";
+            }
+        );
+    });
+</script>

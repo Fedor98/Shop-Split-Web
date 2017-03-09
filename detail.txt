@@ -1,0 +1,33 @@
+Le site a été réalisé avec node.js/sails.js.
+Le moteur de template pour généré les vues est ejs.
+
+
+
+Les fonctions dans le dossier api/controller ont été commentées. Si besoin est, vous pouvez me contacter pour des explications.
+
+Le temps restant pour l'implémentation dépend de la personne qui s'en chargera.
+
+Il n'y a pas de tempaltes préconçus. 
+
+Concernant la géolocation, je n'ai pas pu la faire. Je pensais qu'elle fonctionnait, mais en réalité pas du tout.
+
+L'état du site :
+- page de connection
+- page d'inscription
+- page de profil
+- modification des informations personnelles
+
+- recherche membre
+- page de profil d'un membre
+
+- création d'annonce
+- recherche d'annonce
+- affichage d'une annonce
+
+- boite de réception
+- boite de messages envoyés
+- rédaction d'un nouveau message
+- réponse à un message
+
+
+Un controller existe pour préremplir le site de données tests

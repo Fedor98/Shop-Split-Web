@@ -1,0 +1,33 @@
+<div id="headbarContainer">
+    <p>Salp</p>
+    <p id="profilPageLink">Profil</p>
+    <p id="mails"><a href="/messagerie">Messagerie</a></p>
+    <p id="annonce"><a href="/annonce">Annonces</a></p>
+    <p id="searchProfil"><a href="/recherche">Chercher un membre</a></p>
+    <p id="search-ads"><a href="/recherche/annonce">Chercher une annonce</a></p>
+    <p id="logOut">Déconnexion</p>
+</div>
+
+<script>
+    $("#logOut").click(function(){
+        $.post(
+            '/logout',
+            function(data){
+                window.location = "/";
+            }
+        ).fail(function(res){
+            alert("Erreur : " + $.parseJSON(res.responseText).error);
+        });
+    });
+    
+    $("#profilPageLink").click(function(){
+        $.post(
+            '/current_user',
+            function(data){
+                window.location = "/current_user";
+            }
+        ).fail(function(res){
+            alert("Erreur : " + $.parseJSON(res.responseText).error);
+        });
+    });
+</script>

@@ -1,0 +1,27 @@
+<% if (typeof user != 'undefined') { %>
+    <%- include header_message %>
+<% } %>
+
+<div >
+    <table>
+        <tr>
+            <td>De : </td>
+            <td><%= senderName %></td>
+        </tr>
+        <tr>
+            <td>Date : </td>
+            <td><%= mail.date %></td>
+        </tr>
+        <tr>
+            <td>Sujet : </td>
+            <td><%= mail.title %></td>
+        </tr>
+        <tr>
+            <td>Message : </td>
+            <td><%= mail.content %></td>
+        </tr>
+    </table>
+    <a href="/messagerie/repondre/<%=mail.id%>">Répondre</a>
+    
+    <a href="/messagerie">Retour</a> 
+</div>

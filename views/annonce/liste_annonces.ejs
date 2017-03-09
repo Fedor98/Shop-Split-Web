@@ -1,0 +1,29 @@
+<% if (typeof user != 'undefined') { %>
+    <%- include header_annonce %>
+<% } %>
+
+<div>
+
+    <h3>Annonces publiées</h3>
+
+    <table id="mails">
+        <tr>
+            <th>Titre</th>
+            <th>Description</th>
+            <th>Site/Pays de la commande</th>
+            <th>Créée le</th>
+            <th>Nombre de vues</th>
+            <th>Supprimer</th>
+        </tr>
+        <% ads.forEach(function(ad) { %>
+            <tr>
+                <td><a href="/annonce/afficher_annonce/<%=ad.id%>"><%= ad.title %></a></td>
+                <td><%= ad.short %></td>
+                <td><%= ad.location %></td>
+                <td><%= ad.creationDate %></td>
+                <td><%= ad.countView %></td>
+                <td>X</td>
+            </tr>
+        <% }); %>
+    </table>
+</div>

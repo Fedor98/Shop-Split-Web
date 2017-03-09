@@ -1,0 +1,42 @@
+<% if (typeof user != 'undefined') { %>
+    <%- include header_annonce %>
+<% } %>
+
+<div>
+
+    <h3>Publier une annonce</h3>
+    
+    <label for="title">Titre: </label>
+    <input type="text" name="title" id="title" />
+    <br/>
+    
+    <label for="description">Description: </label>
+    <textarea id="description" name="description" rows=10 cols="70"></textarea>
+    <br/>
+    
+    <label for="location">Site/pays de la commande: </label>
+    <input type="text" name="location" id="location"/>
+    <br/>
+    
+    <button id="createAd">Valider</button>
+        
+</div>
+
+<script>
+
+    $("#createAd").click(function() {
+        var _title = $("#title").val();
+        var _desc = $("#description").val();
+        var _location = $("#location").val();
+        
+        $.post(
+            '/annonce/valider',
+            {title: _title,
+             desc: _desc,
+             location: _location},
+            function() {
+                window.location = "/annonce";
+            });
+    });
+
+</script>

@@ -1,0 +1,30 @@
+<% if (typeof user != 'undefined') { %>
+    <%- include header_message %>
+<% } %>
+
+<div >
+    <h2>Boîte de réception</h2>
+    <table id="mails">
+        <tr>
+            <th>De</th>
+            <th>Sujet</th>
+            <th>Le</th>
+            <th>Ouvert le</th>
+            <th>Supprimer</th>
+        </tr>
+        <% mails.forEach(function(mail) { %>
+        <tr>
+            <td><%= mail.user %></td>
+            <td><a href="/messagerie/lire/<%=mail.mail.id%>"><%= mail.mail.title %></a></td>
+            <td><%= mail.mail.date %></td>
+            
+            <td><% if (typeof mail.mail.openDate != 'undefined') { %>
+                    <%= mail.mail.openDate %>
+                <% } else { %>
+                    Non lu
+                <% } %></td>
+            <td>X</td>
+        </tr>
+        <% }); %>
+    </table>
+</div>

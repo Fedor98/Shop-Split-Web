@@ -1,0 +1,165 @@
+<div class="sign_up_form">
+    <h1>Informations profil</h1>
+    <div>
+        <h3>Nom:</h3>
+        <input type="text" id="lastname" placeholder="Nom" <% if (typeof user.lastName != 'undefined') { %>
+                                                                value="<%= user.lastName %><% } %>"/><br/>
+        <h3>Prénom:</h3>
+        <input type="text" id="firstname" placeholder="Prénom" <% if (typeof user.firstName != 'undefined') { %>
+                                                                value="<%= user.firstName %><% } %>"/><br/>
+        <h3>Age:</h3>
+        <input type="number" id="age" placeholder="Âge" <% if (typeof user.age != 'undefined') { %>
+                                                                value="<%= user.age %><% } %>"/><br/>
+        <h3>Adresse:</h3>
+        <input type="text" id="address" placeholder="Adresse" <% if (typeof user.address != 'undefined') { %>
+                                                                value="<%= user.address %><% } %>"/><br/>
+        <h3>Code postal:</h3>
+        <input type="number" id="zipcode" placeholder="Code postal" <% if (typeof user.zipcode != 'undefined') { %>
+                                                                value="<%= user.zipcode %><% } %>"/><br/>
+        <h3>Ville:</h3>
+        <input type="text" id="city" placeholder="Ville" <% if (typeof user.city != 'undefined') { %>
+                                                                value="<%= user.city %><% } %>"/><br/>
+        <h3>Pays:</h3>
+        <input type="text" id="country" placeholder="Pays" <% if (typeof user.country != 'undefined') { %>
+                                                                value="<%= user.country %><% } %>"/><br/>
+        <h3>Téléphone:</h3>
+        <input type="tel" id="phoneNumber" placeholder="Téléphone" <% if (typeof user.phone != 'undefined') { %>
+                                                                value="<%= user.phone %><% } %>"/><br/>
+        <button id="signupButton">Enregistrer</button>
+    </div>
+
+
+
+    <h1>Intérêts</h1>
+    
+    <div id="countries">
+        <h3>Pays d'intérêts : </h3>
+        <select id="countriesSelect">
+            <% for (var i = 0; i < countriesId.length; ++i) { %>
+                <option value="<%=i%>"><%=countriesId[i]%></option>
+            <% } %>
+        </select>
+        
+        <button id="chooseCountry">Ajouter</button>
+        
+        <ul id="countriesList">
+            <% for (var i = 0; i < countries.length - 1; ++i) { %>
+            <li class="countryEntry<%=countries[i]%>"><span class="oneEntry" style="display:none;"><%=countries[i]%></span><%= countriesId[countries[i]] %><button type="button" class="close" onclick="removeCountry('countryEntry<%=countries[i]%>')">×</button></li>
+                                  <% } %>
+            <li class="countryEntry<%=countries[countries.length - 1]%>"><span class="oneEntry" style="display:none;"><%=countries[i]%></span><%= countriesId[countries[countries.length - 1]] %><button type="button" class="close" onclick="removeCountry('countryEntry<%=countries[countries.length - 1]%>')">×</button></li>
+        </ul>
+    </div>
+
+
+    <div id="sites">
+
+        <h3>Sites favoris : </h3>
+        <ul id="listSites">
+            <% for (var i = 0; i < sites.length; ++i) { %>
+                <li class="siteEntry"><span class="siteEntryValid"><%=sites[i]%></span><button type="button" class="close buttonSite">×</button></li>
+            <% } %>
+        </ul>
+        <input type="text" id="inputSite" placeHolder="Lien"/>
+        <button id="addSite">Ajouter</button>
+
+    </div>
+
+    <div id="interests">
+      
+        <h3>Intérêts : </h3>
+        <ul id="listInterests">
+            <% for (var i = 0; i < interests.length; ++i) { %>
+            <li><span class="interestEntryValid"><%= interests[i] %></span><button type="button" class="close buttonInterest">×</button></li>
+            <% } %>
+        </ul>
+        <input type="text" id="inputInterest" placeHolder="Intérêt"/>
+        <button id="addInterest">Ajouter</button>
+
+    </div>
+
+
+</div>
+
+<script>
+    function removeCountry(id) {
+        $("."+id).remove();
+    }
+
+    $("#listSites").on("click", ".close.buttonSite", function(){
+            $(this).parent().remove();
+    });
+
+    $("#listInterests").on("click", ".close.buttonInterest", function(){
+            $(this).parent().remove();
+    });
+
+    $("#signupButton").click(function() {
+        var _firstname = $("#firstname").val();
+        var _lastname = $("#lastname").val();
+        var _age = $("#age").val();
+        var _address = $("#address").val();
+        var _zipcode = $("#zipcode").val();
+        var _city = $("#city").val();
+        var _country = $("#country").val();
+        var _phoneNumber = $("#phoneNumber").val();
+
+        var _sites = "";
+
+        var _interests = "";
+
+        var _countries = "";
+
+        $(".oneEntry").each(function() {
+                _countries += ";" + $(this).text();
+        });
+
+        _countries += ";";
+        
+        $(".siteEntryValid").each(function() {
+                _sites += ";" + $(this).text();
+        });
+
+        _sites += ";";
+        
+        $(".interestEntryValid").each(function() {
+                _interests += ";" + $(this).text();
+        });
+
+        _interests += ";";
+
+        $.post(
+            '/save_profile',
+            {firstname: _firstname,
+             lastname: _lastname,
+             age: _age,
+             address: _address,
+             zipcode: _zipcode,
+             city: _city,
+             country: _country,
+             phone: _phoneNumber,
+             countries: _countries,
+             sites: _sites,
+             interests: _interests},
+            function () {
+                window.location = "/current_user";
+            }
+        )
+    });
+    
+    $("#chooseCountry").click(function() {
+        var _list = $("#countriesList").text();
+        var _valCountry = $("#countriesSelect").find(":selected").val();
+        var _class = "countryEntry" + _valCountry;
+        $("#countriesList").append('<li class="' + _class + '"><span class="oneEntry" style="display: none;">' + _valCountry + '</span>' + $("#countriesSelect").find(":selected").text() + '<button type="button" class="close"  onclick="removeCountry(\'' + _class + '\')">×</button></li>');
+    });
+
+    $("#addSite").click(function() {
+        var _site = $("#inputSite").val();
+        $("#listSites").append('<li class="siteEntry"><span class="siteEntryValid">' + _site + '</span><button type="button" class="close buttonSite">×</button></li>');
+    });
+
+    $("#addInterest").click(function() {
+        var _interest = $("#inputInterest").val();
+        $("#listInterests").append('<li><span class="interestEntryValid">' + _interest + '</span><button type="button" class="close buttonInterest">×</button></li>');
+    });
+</script>

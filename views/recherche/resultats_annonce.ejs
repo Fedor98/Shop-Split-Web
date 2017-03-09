@@ -1,0 +1,16 @@
+<div id="search-result">
+
+    <% myAds.forEach(function(ad) { %>
+        <div class="user-tile">
+            <p><%= ad.title %></p>
+            <p><%= ad.location %></p>
+            <p><%= ad.descr %></p>
+            <p><a href="/annonce/afficher_annonce/<%=ad.id%>">Voir l'annonce</a></p>
+        </div>
+    <% }); %>
+    
+</div>
+
+<script>
+
+</script>

@@ -1,0 +1,113 @@
+<div id="search">
+
+    <h3>Rechercher un utilisateur : </h3>
+    <div>
+    
+        <div id="countries">
+        <h3>Pays d'intérêts : </h3>
+        <select id="countriesSelect">
+            <% for (var i = 0; i < countriesId.length; ++i) { %>
+                <option value="<%=i%>"><%=countriesId[i]%></option>
+            <% } %>
+        </select>
+        
+        <button id="chooseCountry">Ajouter</button>
+        
+        <ul id="countriesList">
+            
+        </ul>
+    </div>
+ 
+
+    
+    <div id="sites">
+
+        <h3>Sites favoris : </h3>
+        <ul id="listSites">
+            
+        </ul>
+        <input type="text" id="inputSite" placeHolder="Lien"/>
+        <button id="addSite">Ajouter</button>
+
+    </div>
+
+    <div id="interests">
+      
+        <h3>Intérêts : </h3>
+        <ul id="listInterests">
+            
+        </ul>
+        <input type="text" id="inputInterest" placeHolder="Intérêt"/>
+        <button id="addInterest">Ajouter</button>
+
+    </div>
+    
+    </div>
+    
+    <button id="searchButton">Rechercher</button>
+
+</div>
+
+
+<script>
+
+    function removeCountry(id) {
+        $("."+id).remove();
+    }
+    
+    $("#listSites").on("click", ".close.buttonSite", function(){
+            $(this).parent().remove();
+    });
+
+    $("#listInterests").on("click", ".close.buttonInterest", function(){
+            $(this).parent().remove();
+    });
+    
+    $("#chooseCountry").click(function() {
+        var _list = $("#countriesList").text();
+        var _valCountry = $("#countriesSelect").find(":selected").val();
+        var _class = "countryEntry" + _valCountry;
+        $("#countriesList").append('<li class="' + _class + '"><span class="oneEntry" style="display: none;">' + _valCountry + '</span>' + $("#countriesSelect").find(":selected").text() + '<button type="button" class="close"  onclick="removeCountry(\'' + _class + '\')">×</button></li>');
+    });
+    
+    $("#addSite").click(function() {
+        var _site = $("#inputSite").val();
+        $("#listSites").append('<li class="siteEntry"><span class="siteEntryValid">' + _site + '</span><button type="button" class="close buttonSite">×</button></li>');
+    });
+
+    $("#addInterest").click(function() {
+        var _interest = $("#inputInterest").val();
+        $("#listInterests").append('<li><span class="interestEntryValid">' + _interest + '</span><button type="button" class="close buttonInterest">×</button></li>');
+    });
+    
+    $("#searchButton").click(function() {
+        var _sites = ";";
+
+        var _interests = ";";
+
+        var _countries = ";";
+
+        $(".oneEntry").each(function() {
+                _countries += $(this).text() + ";";
+        });
+        
+        $(".siteEntryValid").each(function() {
+                _sites += $(this).text() + ";";
+        });
+        
+        $(".interestEntryValid").each(function() {
+                _interests += $(this).text() + ";";
+        });
+
+        var action = "/recherche/resultatsMembres";
+
+        var form = $('<form action="' + action + '" method="post" style="display:none;">' +
+                          '<input type="text" name="_countries" value="' + _countries + '" />' +
+                          '<input type="text" name="_sites"     value="' + _sites + '" />' +
+                          '<input type="text" name="_interests" value="' + _interests + '" />' +
+                      '</form>');
+
+        $('body').append(form);
+        form.submit();
+    });
+</script>

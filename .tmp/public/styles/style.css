@@ -1,0 +1,99 @@
+body
+{
+    background-color: #fafafa;
+    margin: 0px;
+}
+
+#home-form
+{
+    text-align:center;
+    border: 1px solid #444444;
+    display: block;
+    width: 300px;
+    margin: auto;
+}
+
+#home-form input
+{
+    width: 200px;
+    height: 20px;
+    text-align: center;
+    font-size: 15px;
+}
+
+#connexion-title
+{
+    font-size: 20px;
+}
+
+::-webkit-input-placeholder {
+   text-align: center;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   text-align: center;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   text-align: center;  
+}
+
+:-ms-input-placeholder {  
+   text-align: center; 
+}
+
+#headbarContainer
+{
+    background-color: #EEEEEE;
+    width: 100%;
+}
+
+#headbarContainer p
+{
+    margin: 0px;
+    display: inline;
+}
+
+#headbarContainer #logOut
+{
+    float: right;
+}
+
+#countriesList li
+{
+    display: inline-block;
+    border: 1px solid black;
+}
+
+button.close
+{
+    -webkit-appearance: none;
+    background: 0 0;
+    cursor: pointer;
+    display: inline-block;
+    text-shadow: 0 1px 0 #fff;
+    padding: 0px;
+    border: 0;
+    font-size: 21px;
+    font-weight: 700;
+    opacity: .2;
+}
+
+button.close:hover
+{
+    opacity: .5;
+}
+
+
+/* #########################################
+Messagerie */
+
+table#mails
+{
+    border-collapse: collapse;
+}
+
+#mails td, th
+{
+    border: 1px solid black;
+}

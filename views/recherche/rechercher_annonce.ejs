@@ -1,0 +1,54 @@
+<div id="search">
+
+    <h3>Rechercher une annonce : </h3>
+    <div>
+
+        <div id="keywords">
+
+            <h3>Mot clé: </h3>
+            <ul id="listKeyWords">
+
+            </ul>
+            <input type="text" id="inputKeyWord" placeHolder="Mots clés"/>
+            <button id="addKeyWord">Ajouter</button>
+
+        </div>
+    
+    </div>
+    
+    <button id="searchButton">Rechercher</button>
+
+</div>
+
+
+<script>
+
+    function removeCountry(id) {
+        $("."+id).remove();
+    }
+    $("#listKeyWords").on("click", ".close.buttonKeyWord", function(){
+            $(this).parent().remove();
+    });
+
+    $("#addKeyWord").click(function() {
+        var _word = $("#inputKeyWord").val();
+        $("#listKeyWords").append('<li><span class="keywordValidEntry">' + _word + '</span><button type="button" class="close buttonKeyWord">×</button></li>');
+    });
+    
+    $("#searchButton").click(function() {
+        var _keywords = ";";
+
+        $(".keywordValidEntry").each(function() {
+                _keywords += $(this).text() + ";";
+        });
+
+        var action = "/recherche/resultatsAnnonces";
+
+        var form = $('<form action="' + action + '" method="post" style="display:none;">' +
+                          '<input type="text" name="_keywords" value="' + _keywords + '" />' +
+                      '</form>');
+
+        $('body').append(form);
+        form.submit();
+    });
+</script>
